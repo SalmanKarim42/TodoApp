@@ -92,7 +92,7 @@ class App extends Component {
   editItem(event) {
     let inputField = event.target.parentNode.parentNode.firstChild.firstChild;
     let key = event.target.parentNode.parentNode.id;
-    // console.log(event.target.parentNode.parentNode.child[1].firstChild)
+
     if (event.target.innerHTML === "EDIT") {
       event.target.innerHTML = "SAVE";
       // inputField.disabled = true;
