@@ -16,6 +16,11 @@ function todoItem(state = intialState, action) {
             let obj = Object.assign({}, state);
             obj[action.key].todo = action.inputval;
             return obj;
+        case todoAction.CHECKTODO:
+            return {
+                ...state,
+                [action.key]: action.val
+            };
         default:
             return state;
     }

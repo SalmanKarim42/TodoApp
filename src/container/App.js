@@ -46,8 +46,8 @@ function sendDataToStore(dispatch) {
     edittodo: (key, data) => {
       dispatch(TodoMiddleware.asyncEditTodos(key, data));
     },
-    checkBox: (key, done) => {
-      dispatch(TodoMiddleware.asyncCheckTodos(key, done));
+    checkBox: (key, data) => {
+      dispatch(TodoMiddleware.asyncCheckTodos(key, data));
     }
 
   }
@@ -76,9 +76,6 @@ class App extends Component {
       this.setState({
         [obj.key]: obj
       })
-
-
-
       // console.log(this.state.todos)
     });
 
@@ -87,7 +84,7 @@ class App extends Component {
    addingValue(data) {
     // this.props.addtotodo(val);
     firebase.database().ref('/').child('todos').push(data).then((val) => {
-      console.log(val.key, data);
+      // console.log(val.key, data);
       data.key = val.key;
     });
     // console.log(val)
@@ -95,7 +92,7 @@ class App extends Component {
   editItem(event) {
     let inputField = event.target.parentNode.parentNode.firstChild.firstChild;
     let key = event.target.parentNode.parentNode.id;
-    console.log(event.target.parentNode.parentNode.child[1].firstChild)
+    // console.log(event.target.parentNode.parentNode.child[1].firstChild)
     if (event.target.innerHTML === "EDIT") {
       event.target.innerHTML = "SAVE";
       // inputField.disabled = true;
@@ -120,7 +117,7 @@ class App extends Component {
         [key]: obj
       });
       event.target.value = "off";
-      this.props.checkBox(key,true);
+      this.props.checkBox(key,obj);
     } else {
       let obj = this.state[key]
       obj.done = false;
@@ -128,18 +125,18 @@ class App extends Component {
         [key]: obj
       })
       event.target.value = "on";
-      this.props.checkBox(key,false);
+      this.props.checkBox(key,obj);
     }
   }
   changingValue(event) {
     let key = event.target.parentNode.parentNode.id;
     let obj = this.state[key];
     obj.todo = event.target.value;
-    console.log(obj);
+    // console.log(obj);
     this.setState({
-      [key]: Object({}, this.state[key], obj)
+      [key]: obj
     })
-    console.log(event.target.parentNode.parentNode.id);
+    // console.log(event.target.parentNode.parentNode.id);
   }
   deleteAllTodos() {
     Object.keys(this.state).map((key) => {

@@ -27,4 +27,11 @@ export default class TodoMiddleware {
             dispatch(todoAction.editTodo(key,data));
         }
     }
+    static asyncCheckTodos(key, data){
+          console.log(key);
+        firebase.database().ref('/todos/'+key).set(data);
+         return (dispatch)=>{
+            dispatch(todoAction.checkTodo(key,data));
+        }
+    }
 }

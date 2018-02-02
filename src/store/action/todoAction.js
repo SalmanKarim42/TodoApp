@@ -2,6 +2,7 @@ export default class todoAction {
     static ADDTODO = 'add_todo';
     static DELETETODO = 'delete_todo';
     static EDITTODO = 'edit_todo';
+    static CHECKTODO = 'check_todo';
 
     static addTodo(value){
         return {type:this.ADDTODO, val: value};
@@ -11,5 +12,8 @@ export default class todoAction {
     }
     static editTodo(key,value){
         return {type:this.EDITTODO, inputval: value,key:key};
+    }
+    static checkTodo(key,data){
+        return {type:this.CHECKTODO,val:data,key:key};
     }
 }
